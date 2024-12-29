@@ -32,7 +32,7 @@ class ComfyUIAgent:
         height: int = 512,
         steps: int = 20,
         cfg_scale: float = 7.0,
-        model: str = "sd_xl_base_1.0.safetensors",
+        model: str = "flux.1-dev",
         sampler: str = "euler",
         scheduler: str = "normal",
         seed: int = -1,

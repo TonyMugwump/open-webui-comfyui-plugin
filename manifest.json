@@ -47,7 +47,7 @@
                     "model": {
                         "type": "string",
                         "description": "Model checkpoint to use",
-                        "default": "sd_xl_base_1.0.safetensors"
+                        "default": "flux.1-dev"
                     },
                     "sampler": {
                         "type": "string",
