@@ -1,0 +1,60 @@
+{
+    "name": "comfyui-agent",
+    "version": "0.1.0",
+    "description": "ComfyUI Agent Plugin for Open WebUI",
+    "author": "OpenHands",
+    "email": "openhands@all-hands.dev",
+    "url": "https://github.com/TonyMugwump/open-webui-comfyui-plugin",
+    "license": "MIT",
+    "requires": {
+        "open-webui": ">=0.1.0"
+    },
+    "provides": {
+        "functions": [
+            {
+                "name": "generate_image",
+                "description": "Generate an image using ComfyUI with CLIP-guided refinement",
+                "parameters": {
+                    "description": {
+                        "type": "string",
+                        "description": "Text description of the image to generate"
+                    },
+                    "width": {
+                        "type": "integer",
+                        "description": "Image width",
+                        "default": 512
+                    },
+                    "height": {
+                        "type": "integer",
+                        "description": "Image height",
+                        "default": 512
+                    },
+                    "steps": {
+                        "type": "integer",
+                        "description": "Number of sampling steps",
+                        "default": 20
+                    },
+                    "cfg_scale": {
+                        "type": "number",
+                        "description": "Classifier-free guidance scale",
+                        "default": 7.0
+                    }
+                }
+            },
+            {
+                "name": "analyze_image",
+                "description": "Analyze how well an image matches a description using CLIP",
+                "parameters": {
+                    "image_path": {
+                        "type": "string",
+                        "description": "Path to the image file"
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "Text description to compare against"
+                    }
+                }
+            }
+        ]
+    }
+}
