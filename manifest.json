@@ -19,6 +19,11 @@
                         "type": "string",
                         "description": "Text description of the image to generate"
                     },
+                    "negative_prompt": {
+                        "type": "string",
+                        "description": "Negative prompt to guide what not to generate",
+                        "default": "ugly, blurry, low quality"
+                    },
                     "width": {
                         "type": "integer",
                         "description": "Image width",
@@ -38,6 +43,26 @@
                         "type": "number",
                         "description": "Classifier-free guidance scale",
                         "default": 7.0
+                    },
+                    "model": {
+                        "type": "string",
+                        "description": "Model checkpoint to use",
+                        "default": "sd_xl_base_1.0.safetensors"
+                    },
+                    "sampler": {
+                        "type": "string",
+                        "description": "Sampling method",
+                        "default": "euler"
+                    },
+                    "scheduler": {
+                        "type": "string",
+                        "description": "Scheduler type",
+                        "default": "normal"
+                    },
+                    "seed": {
+                        "type": "integer",
+                        "description": "Random seed (-1 for random)",
+                        "default": -1
                     }
                 }
             },
