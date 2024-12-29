@@ -35,9 +35,9 @@ class Plugin:
 
     def __init__(self):
         self.config = self.Config()
-        self.outputs_dir = os.path.join(self.config.data_dir, 'outputs/comfyui')
-        self.cache_dir = os.path.join(self.config.data_dir, 'cache/comfyui')
-        self.logs_dir = os.path.join(self.config.data_dir, 'logs/comfyui')
+        self.outputs_dir = os.path.join(self.config.data_dir, "outputs/comfyui")
+        self.cache_dir = os.path.join(self.config.data_dir, "cache/comfyui")
+        self.logs_dir = os.path.join(self.config.data_dir, "logs/comfyui")
         
         # Create directories
         for dir_path in [self.outputs_dir, self.cache_dir, self.logs_dir]:
