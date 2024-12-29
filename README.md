@@ -15,15 +15,15 @@ A plugin that adds intelligent image generation capabilities to Open WebUI using
 
 1. Create required directories:
 ```bash
-mkdir -p backend/data/outputs/comfyui \
-         backend/data/cache/comfyui \
-         backend/data/logs/comfyui \
-         backend/extensions/plugins
+mkdir -p open-webui/data/outputs/comfyui \
+         open-webui/data/cache/comfyui \
+         open-webui/data/logs/comfyui \
+         open-webui/extensions/plugins
 ```
 
 2. Clone the plugin:
 ```bash
-cd backend/extensions/plugins
+cd open-webui/extensions/plugins
 git clone https://github.com/TonyMugwump/open-webui-comfyui-plugin.git comfyui-agent
 ```
 
@@ -32,8 +32,8 @@ git clone https://github.com/TonyMugwump/open-webui-comfyui-plugin.git comfyui-a
 services:
   open-webui:
     volumes:
-      - ./backend/data:/app/backend/data
-      - ./backend/extensions:/app/backend/extensions
+      - ./open-webui/data:/app/backend/data
+      - ./open-webui/extensions:/app/backend/extensions
     environment:
       - COMFYUI_API_URL=http://comfyui:8188
 
