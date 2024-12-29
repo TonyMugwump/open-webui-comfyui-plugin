@@ -20,7 +20,6 @@ class ComfyUIAgent:
         self.cache_dir = os.path.join(self.data_dir, 'cache/comfyui')
         self.logs_dir = os.path.join(self.data_dir, 'logs/comfyui')
         
-        # Create directories
         for dir_path in [self.outputs_dir, self.cache_dir, self.logs_dir]:
             Path(dir_path).mkdir(parents=True, exist_ok=True)
             
@@ -39,7 +38,6 @@ class ComfyUIAgent:
     ) -> Dict[str, Any]:
         """Generate an image using ComfyUI."""
         try:
-            # Prepare workflow
             workflow = {
                 "3": {
                     "class_type": "KSampler",
@@ -91,22 +89,18 @@ class ComfyUIAgent:
                 }
             }
 
-            # Create client ID
             client_id = str(uuid.uuid4())
-            
-            # Queue prompt
             server_address = self.api_url.replace('http://', '')
+            
             response = requests.post(f"http://{server_address}/prompt", json={
                 "prompt": workflow,
                 "client_id": client_id
             })
             response.raise_for_status()
             
-            # Connect to websocket
             ws = websocket.WebSocket()
             ws.connect(f"ws://{server_address}/ws?clientId={client_id}")
             
-            # Wait for generation
             while True:
                 out = ws.recv()
                 if out:
@@ -119,7 +113,6 @@ class ComfyUIAgent:
                         if 'output' in message['data']:
                             output = message['data']['output']
                             if 'images' in output:
-                                # Save image
                                 image_data = output['images'][0]
                                 image_binary = base64.b64decode(image_data.split(",")[1])
                                 image_path = os.path.join(self.outputs_dir, f"{client_id}.png")
@@ -180,9 +173,6 @@ class ComfyUIAgent:
                 "error": str(e)
             }
 
-# Create singleton instance
 agent = ComfyUIAgent()
-
-# Export functions
 generate_image = agent.generate_image
 analyze_image = agent.analyze_image
