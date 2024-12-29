@@ -1,10 +1,11 @@
 """Functions exported to Open WebUI."""
+import json
 from typing import Dict, Any
 from comfyui_agent.plugin import generate_image, analyze_image
 
 def get_functions() -> Dict[str, Any]:
     """Return the functions that will be exposed to Open WebUI."""
-    return {
+    return json.loads("""{
         "generate_image": {
             "name": "generate_image",
             "description": "Generate an image using ComfyUI with CLIP-guided refinement",
@@ -59,7 +60,7 @@ def get_functions() -> Dict[str, Any]:
                     "default": -1
                 }
             },
-            "function": generate_image
+            "function": "generate_image"
         },
         "analyze_image": {
             "name": "analyze_image",
@@ -74,6 +75,6 @@ def get_functions() -> Dict[str, Any]:
                     "description": "Text description to compare against"
                 }
             },
-            "function": analyze_image
+            "function": "analyze_image"
         }
-    }
+    }""")
