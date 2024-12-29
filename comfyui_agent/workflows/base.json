@@ -1,0 +1,68 @@
+{
+    "nodes": [
+        {
+            "id": "load_checkpoint",
+            "type": "CheckpointLoaderSimple",
+            "inputs": {
+                "ckpt_name": "v1-5-pruned.ckpt"
+            }
+        },
+        {
+            "id": "prompt",
+            "type": "CLIPTextEncode",
+            "inputs": {
+                "text": "",
+                "clip": ["load_checkpoint", 1]
+            }
+        },
+        {
+            "id": "negative_prompt",
+            "type": "CLIPTextEncode",
+            "inputs": {
+                "text": "ugly, blurry, low quality",
+                "clip": ["load_checkpoint", 1]
+            }
+        },
+        {
+            "id": "sampler",
+            "type": "KSampler",
+            "inputs": {
+                "model": ["load_checkpoint", 0],
+                "positive": ["prompt", 0],
+                "negative": ["negative_prompt", 0],
+                "latent": ["empty_latent", 0],
+                "seed": -1,
+                "steps": 20,
+                "cfg": 7.0,
+                "sampler_name": "euler_a",
+                "scheduler": "normal",
+                "denoise": 1.0
+            }
+        },
+        {
+            "id": "empty_latent",
+            "type": "EmptyLatentImage",
+            "inputs": {
+                "width": 512,
+                "height": 512,
+                "batch_size": 1
+            }
+        },
+        {
+            "id": "decode",
+            "type": "VAEDecode",
+            "inputs": {
+                "samples": ["sampler", 0],
+                "vae": ["load_checkpoint", 2]
+            }
+        },
+        {
+            "id": "save",
+            "type": "SaveImage",
+            "inputs": {
+                "images": ["decode", 0],
+                "filename_prefix": "comfyui"
+            }
+        }
+    ]
+}
